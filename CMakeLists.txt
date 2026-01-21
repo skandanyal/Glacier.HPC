@@ -1,32 +1,26 @@
-cmake_minimum_required(VERSION 4.0)
-project(Glacier_HPC)
+cmake_minimum_required(VERSION 3.20)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CUDA_COMPILER /usr/local/cuda/bin/nvcc CACHE FILEPATH "" FORCE)
+set(CMAKE_CUDA_ARCHITECTURES 86 CACHE STRING "" FORCE)
+project(Glacier.HPC C CXX CUDA)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native -ffast-math -fopt-info-vec-optimized")
+set (CMAKE_C_STANDARD 17)
+set (CMAKE_C_STANDARD_REQUIRED ON)
+set (CMAKE_CXX_STANDARD 20)
+set (CMAKE_CXX_STANDARD_REQUIRED ON)
+set (CMAKE_CUDA_STANDARD 13)
+set (CMAKE_CUDA_STANDARD_REQUIRED ON)
 
-add_executable(Glacier_HPC main.cpp)
+# Common flags for the whole project
+add_library(project_config INTERFACE)
+target_compile_options(project_config INTERFACE
+        -Wall -Wextra
+        $<$<CONFIG:Debug>:-g -O0>
+        $<$<CONFIG:Benchmark>:-O3 -march=native -fopenmp -ffast-math>
+        $<$<CONFIG:CUDADebug>:-g>
+        $<$<CONFIG:CUDABenchmark>:-g>
+)
 
-set(EIGEN_INCLUDE_DIR /home/skandan-c-y/cpp_libraries/eigen)
-
-set(Boost_NO_SYSTEM_PATHS ON)
-include_directories(BEFORE ${EIGEN_INCLUDE_DIR})
-include_directories(BEFORE ${BOOST_INCLUDE_DIR})
-
-find_package(OpenMP REQUIRED)
-find_package(BLAS REQUIRED)
-
-if(OpenMP_CXX_FOUND)
-    target_link_libraries(Glacier_HPC INTERFACE OpenMP::OpenMP_CXX)
-endif()
-
-if(BLAS_FOUND)
-    target_link_libraries(Glacier_HPC INTERFACE BLAS::BLAS)
-endif()
-
-target_compile_definitions(Glacier_HPC PRIVATE Glacier_HPC)
-
-target_compile_definitions(Glacier_HPC PRIVATE DEBUG_MODE=1)
+# Add kernel subdirectories here
+add_subdirectory(src/saxpy)
+add_subdirectory(src/squared_arr)
