@@ -83,4 +83,4 @@ cmake --build cmake-build-release -j$(nproc)
 
 ## License
 
-See `LICENSE.txt.`
+See `LICENSE`
