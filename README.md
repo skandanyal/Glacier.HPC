@@ -36,7 +36,7 @@ Numerical kernels derived from common supervised machine learning algorithms,
 especially used in Glacier.ML
 * SAXPY
 * GEMM
-* pth order distance
+* pth order distance (kNN)
 
 
 ## Benchmarking Environment
@@ -62,6 +62,8 @@ C++20, C17
 **Development and Profiling:**       
 ![CMake](https://img.shields.io/badge/CMake-06466B?style=for-the-badge&logo=cmake&logoColor=white)
 ![perf](https://img.shields.io/badge/perf-E03C31?style=for-the-badge&logo=linux&logoColor=white)
+![Nsight Compute](https://img.shields.io/badge/Nsight_Compute-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+
 
 
 ## Build instructions 🔨
