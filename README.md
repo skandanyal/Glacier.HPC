@@ -7,9 +7,7 @@
  ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝      ╚═════╝ 
  
 Profiling, Benchmarking and Analysis of Numerical Kernels derived from common Supervised Machine Learning 
-Algorithms on consumer grade computing hardware.   
-
-Licensed for viewing only. Not open-source. See LICENSE.txt for details.      
+Algorithms on consumer grade computing hardware.    
 
 Project scope: Major project for B.E CSE (AI&ML)
 Author: Skandan C.Y                                       
@@ -21,14 +19,6 @@ Author: Skandan C.Y
 * Study kernel behavior under different release configurations and compiler optimization flags
 * Profile numerical kernels to identify behavior and system roofline
 * Act as a controlled benchmarking environment to optimize numerical algorithms on Glacier.ML
-
-
-## Non Goals
-Glacier.HPC is not:
-* A machine learning/deep learning framework 
-* Open source or open to collaborations (yet)
-* Full system profiling tool 
-* Educational content 
 
 
 ## Scope 
@@ -72,17 +62,4 @@ To build with `release` flags (`-g`, `-O0`)
 ```
 cmake -S . -B cmake-build-release -DCMAKE_BUILD_TYPE=Debug       
 cmake --build cmake-build-release -j$(nproc)
-```
 
-
-## Status
-
-```WORK IN PROGRESS```
-
-* Benchmarking drivers, kernels and harnesses may change without notice
-* This repository reflects an evolving understanding of performance-oriented kernel design.
-
-
-## License
-
-See `LICENSE`
