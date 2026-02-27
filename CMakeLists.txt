@@ -12,7 +12,7 @@ add_library(project_config INTERFACE)
 target_compile_options(project_config INTERFACE
         -Wall -Wextra
         $<$<CONFIG:Debug>:-g -O0>
-        $<$<CONFIG:Release>:-O3 -march=native -ffast-math>
+        $<$<CONFIG:Release>:-O3 -march=native -fopenmp -ffast-math>
 )
 
 find_package(OpenMP REQUIRED)
