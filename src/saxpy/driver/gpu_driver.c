@@ -61,6 +61,7 @@ int main() {
     printf("\"flops_per_iter\":%d,", flops_per_iter);
     printf("\"flops_per_second\":%.6f,", flops_per_second);
     printf("\"memory_bandwidth_gbps\": %.6f}\n", mem_bandwidth_gbps);
+    fflush(stdout);
 
     free(x);
     free(y);

@@ -7,9 +7,8 @@
 
 void saxpy_parallel(const float *restrict x,
     float *restrict y,
-    float a,
-    int arr_size,
-    const int num_threads
+    const float a,
+    int arr_size
     );
 
 #endif // LEARNCLEANC_PARALLEL_KERNEL_H
