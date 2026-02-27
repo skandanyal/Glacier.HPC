@@ -38,8 +38,9 @@ especially used in Glacier.ML
 Benchmarks have been conducted on:
 ```
 AMD Ryzen 6600H (6 cores / 12 threads)
+NVidia RTX 3050
 ```
-Refer `cpu_info.txt` for detailed information.
+Refer `hardware_info.txt` for detailed information.
 ### Manual performance settings 
 * Laptop connected to power source
 * Power mode set to `Performance`
