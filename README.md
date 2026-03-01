@@ -6,7 +6,7 @@
 ╚██████╔╝███████╗██║  ██║╚██████╗██║███████╗██║  ██║██╗██║  ██║██║     ╚██████╗
  ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝      ╚═════╝ 
  
-Profiling, Benchmarking and Analysis of Numerical Kernels derived from common Supervised Machine Learning 
+Glacier.HPC: Profiling, Benchmarking and Analysis of Numerical Kernels derived from common Supervised Machine Learning 
 Algorithms on consumer grade computing hardware.    
 
 Project scope: Major project for B.E CSE (AI&ML)
@@ -29,7 +29,7 @@ Author: Skandan C.Y
 ## Scope 
 Numerical kernels derived from common supervised machine learning algorithms, 
 especially used in Glacier.ML
-* SAXPY
+* SAXPY (roofline model established)
 * GEMM
 * pth order distance (kNN)
 
@@ -41,10 +41,17 @@ AMD Ryzen 6600H (6 cores / 12 threads)
 NVidia RTX 3050
 ```
 Refer `hardware_info.txt` for detailed information.
+
 ### Manual performance settings 
 * Laptop connected to power source
 * Power mode set to `Performance`
 * No other applications or background tasks opened manually
+
+### Memory Bandwidth 
+Memory Bandwidth scaling across multiple threads was benchmarked using the original `Triad` kernel 
+from `STREAM` benchmarking suite. Peak Memory Bandwidth was found to be `18.956 GB/s` when set 
+to `threads=2`.
+See `STREAM/README.md` for further infomation.
 
 Benchmark results are exploratory and used primarily for relative comparison and profiling, not for leaderboard claims.
 
@@ -53,10 +60,6 @@ Benchmark results are exploratory and used primarily for relative comparison and
 * Cache lines are heated before everytime the driver is run.
 * Kernels are run 1000 times to ensure capture of coherent results.
 * A Python based harness is used to perform benchmarking experiments, ensuring minimal human interference.
-
-
-<-- ## Testing !-->
-<-- ## Containerization and CI/CD pipeline !-->
 
 
 ## Languages and Frameworks used:
