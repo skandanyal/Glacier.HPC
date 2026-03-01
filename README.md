@@ -67,15 +67,18 @@ Benchmark results are exploratory and used primarily for relative comparison and
 C++20, C17
 
 **Core stack:**     
-![Eigen](https://img.shields.io/badge/Eigen3.0-1F1232?style=for-the-badge&logo=matrix&logoColor=white)
+
+[//]: # (![Eigen]&#40;https://img.shields.io/badge/Eigen3.0-1F1232?style=for-the-badge&logo=matrix&logoColor=white&#41;)
 ![OpenMP](https://img.shields.io/badge/OpenMP-26667F?style=for-the-badge&logo=openmp&logoColor=white)
-![OpenBLAS](https://img.shields.io/badge/OpenBLAS-E00?style=for-the-badge&logo=openblas&logoColor=white)
-![CUDA13](https://img.shields.io/badge/CUDA13-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+
+[//]: # (![OpenBLAS]&#40;https://img.shields.io/badge/OpenBLAS-E00?style=for-the-badge&logo=openblas&logoColor=white&#41;)
+[//]: # (![CUDA13]&#40;https://img.shields.io/badge/CUDA13-76B900?style=for-the-badge&logo=nvidia&logoColor=white&#41;)
 
 **Development and Profiling:**       
 ![CMake](https://img.shields.io/badge/CMake-06466B?style=for-the-badge&logo=cmake&logoColor=white)
 ![perf](https://img.shields.io/badge/perf-E03C31?style=for-the-badge&logo=linux&logoColor=white)
-![Nsight Compute](https://img.shields.io/badge/Nsight_Compute-76B900?style=for-the-badge&logo=nvidia&logoColor=white)
+
+[//]: # (![Nsight Compute]&#40;https://img.shields.io/badge/Nsight_Compute-76B900?style=for-the-badge&logo=nvidia&logoColor=white&#41;)
 
 
 
