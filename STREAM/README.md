@@ -1,9 +1,9 @@
 ## Acknowledgement
 The files in the current directory `STREAM` has been obtained **unmodified** from the 
-![official STREAM site](https://www.cs.virginia.edu/stream/FTP/Code/) published by 
+[official STREAM site](https://www.cs.virginia.edu/stream/FTP/Code/) published by 
 **Dr. John D McCalpin** at the University of Virginia. as per complete acceptance of 
 terms mentioned in 
-![LICENSE.txt](https://www.cs.virginia.edu/stream/FTP/Code/LICENSE.txt). 
+[LICENSE.txt](https://www.cs.virginia.edu/stream/FTP/Code/LICENSE.txt). 
 
 
 ## Observed Memory Bandwidth 
@@ -11,14 +11,14 @@ terms mentioned in
 The standard `Triad` numerical kernel from `STREAM` benchmark suite was used to 
 measure the sustained main-memory bandwidth on the current hardware (AMD Ryzen 5 6600H).
 
-STREAM's Trias kernel evaluates:
+STREAM's Triad kernel evaluates:
 ```
 A[i] = B[i] + scalar * C[i]
 ```
 This operation stresses memory bandwidth due to low arithmetic intensity and large sequential 
 memory transfers.
 
-The benchmark was compiled with aggreesive optimization and OpenMP enabled:
+The benchmark was compiled with aggressive optimization and OpenMP enabled:
 ```bash 
 cd STREAM 
 gcc -O3 -march=native -fopenmp -DSTREAM_ARRAY_SIZE=50000000 stream.c -o stream
