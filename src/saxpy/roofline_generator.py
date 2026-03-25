@@ -39,8 +39,8 @@ plt.loglog(AI, memory_roof, linestyle='--', label='Memory Roof')
 plt.loglog(AI, compute_roof, linestyle='--', label='Compute Roof')
 plt.loglog(AI, roofline, linewidth=2, label='Roofline')
 
-plt.scatter(AI_saxpy, Perf_saxpy)
-plt.text(AI_saxpy, Perf_saxpy*1.2, "SAXPY")
+# plt.scatter(AI_saxpy, Perf_saxpy)
+# plt.text(AI_saxpy, Perf_saxpy*1.2, "SAXPY")
 
 plt.axvline(AI_ridge, linestyle=':', label=f'Ridge Point ≈ {AI_ridge:.1f}')
 
