@@ -31,13 +31,13 @@ target_include_directories(saxpy_parallel PRIVATE .)
 # -------------------------
 # CUDA
 # -------------------------
-add_executable(saxpy_gpu
-        driver/gpu_driver.c
-        kernels/gpu_kernel.cu
-)
-target_link_libraries(saxpy_gpu PRIVATE project_config cuda)
-target_include_directories(saxpy_gpu PRIVATE .)
-
-set_target_properties(saxpy_gpu PROPERTIES
-        CUDA_SEPARABLE_COMPILATION ON
-)
+#add_executable(saxpy_gpu
+#        driver/gpu_driver.c
+#        kernels/gpu_kernel.cu
+#)
+#target_link_libraries(saxpy_gpu PRIVATE project_config cuda)
+#target_include_directories(saxpy_gpu PRIVATE .)
+#
+#set_target_properties(saxpy_gpu PROPERTIES
+#        CUDA_SEPARABLE_COMPILATION ON
+#)
