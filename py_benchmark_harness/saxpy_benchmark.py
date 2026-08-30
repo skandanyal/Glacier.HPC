@@ -4,9 +4,7 @@ import statistics
 from datetime import datetime
 import os
 
-# -----------------------------
-# Configuration
-# -----------------------------
+
 benchmark_binaries = {
     "saxpy_plain": "./cmake-build-debug/src/saxpy/saxpy_plain",
     "saxpy_restrict": "./cmake-build-debug/src/saxpy/saxpy_restrict",
@@ -27,9 +25,7 @@ perf_events = [
     "task-clock"
 ]
 
-# -----------------------------
-# Helpers
-# -----------------------------
+
 def run_perf(binary, threads=None):
     env = os.environ.copy()
     cmd = []
@@ -93,9 +89,7 @@ def parse_perf(perf_text):
 def median(lst):
     return statistics.median(lst)
 
-# -----------------------------
-# Run Benchmarks
-# -----------------------------
+
 results = {}
 
 for name, binary in benchmark_binaries.items():
@@ -148,19 +142,19 @@ for name, binary in benchmark_binaries.items():
             "median_ipc": median(ipc_list),
             "median_frontend_idle": median(frontend_idle_pct),
             "median_cpus_utilized": median(cpus_utilized),
+            "lowest_time_taken": min(times),
+            "highest_time_taken": max(times),
         }
 
-# -----------------------------
-# Emit Markdown
-# -----------------------------
+
 now = datetime.now().strftime("%A, %B %d, %Y")
 
 print(f"## SAXPY Benchmark Results    ")
 print(f"Date: {now}   ")
 print(f"Runs per configuration: {runs}\n    ")
 
-print("| Kernel | Threads | Time (s) | GFLOPs/s | Mem BW (GB/s) | IPC | Frontend Idle (%) | CPUs Utilized |")
-print("|:------:|:-------:|:--------:|:--------:|:-------------:|:---:|:-----------------:|:-------------:|")
+print("| Kernel | Threads | Median time (s) | Highest time (s) | Lowest time(s) | GFLOPs/s | Mem BW (GB/s) | IPC | Frontend Idle (%) | CPUs Utilized |")
+print("|:------:|:-------:|:---------------:|:----------------:|:--------------:|:--------:|:-------------:|:---:|:-----------------:|:-------------:|")
 
 for k, v in results.items():
     if "_threads" in k:
@@ -172,9 +166,11 @@ for k, v in results.items():
     print(
         f"| {base_name} | {threads} | "
         f"{v['median_time']:.6e} | "
+        f"{v['highest_time_taken']:.6e} | "
+        f"{v['lowest_time_taken']:.6e} | "
         f"{v['median_gflops']:.3f} | "
         f"{v['median_bandwidth']:.3f} | "
         f"{v['median_ipc']:.3f} | "
         f"{v['median_frontend_idle']:.2f} | "
-        f"{v['median_cpus_utilized']:.2f} |"
+        f"{v['median_cpus_utilized']:.2f} | "
     )
