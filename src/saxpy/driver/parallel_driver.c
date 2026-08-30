@@ -52,8 +52,8 @@ int main() {
   // -----RESULTS-----
   sink = y[n - 1];
   int flops_per_iter = 2 * n;
-  double flops_per_second = 2 * n / (float)time_elapsed;
-  double mem_bandwidth_gbps = 12 * n / (float)time_elapsed / 1e9;
+  double flops_per_second = 2.0 * n / time_elapsed;
+  double mem_bandwidth_gbps = 12.0 * n / time_elapsed / 1e9;
 
   printf("{");
   printf("\"kernel\":\"saxpy_parallel\",");

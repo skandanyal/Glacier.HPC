@@ -47,19 +47,19 @@ int main() {
   clock_gettime(CLOCK_MONOTONIC, &end_time);
 
   double time_elapsed = ((end_time.tv_sec - start_time.tv_sec) +
-                         (end_time.tv_nsec - start_time.tv_nsec) * 1e-9) /
-                        1000;
+                         (end_time.tv_nsec - start_time.tv_nsec) * 1e-9);
+  double time_per_iteration = time_elapsed / 1000;
 
   // -----RESULTS-----
   sink = y[n - 1];
   int flops_per_iter = 2 * n;
-  double flops_per_second = 2 * n / (float)time_elapsed;
-  double mem_bandwidth_gbps = 12 * n / (float)time_elapsed / 1e9;
+  double flops_per_second = 2.0 * n / time_per_iteration;
+  double mem_bandwidth_gbps = 12.0 * n / time_per_iteration / 1e9;
 
   printf("{");
   printf("\"kernel\":\"saxpy_restrict\",");
   printf("\"last_element\":%.6f,", sink);
-  printf("\"mean_time_per_iteration\":%.6f,", time_elapsed);
+  printf("\"mean_time_per_iteration\":%.6f,", time_per_iteration);
   printf("\"flops_per_iter\":%d,", flops_per_iter);
   printf("\"flops_per_second\":%.6f,", flops_per_second);
   printf("\"memory_bandwidth_gbps\": %.6f}\n", mem_bandwidth_gbps);
