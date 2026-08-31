@@ -3,18 +3,55 @@ import json
 import statistics
 from datetime import datetime
 import os
+import argparse
 
 
-benchmark_binaries = {
+# -- inputs --
+parser = argparse.ArgumentParser(description="Enter the number of runs and binary build location.")
+
+parser.add_argument('--runs', type=int, required=True, help="Number of runs")
+parser.add_argument('--bin', type=str, choices=["debug", "benchmark"], required=True, help="Binary build location ('debug' or 'benchmark'")
+args = parser.parse_args()
+
+if args.bin == "benchmark" and args.runs < 5:
+    raise RuntimeError("Minimum accepted runs for benchmark are 5.")
+if args.runs < 1:
+    raise RuntimeError("Minimum accepted runs are 1.")
+
+
+# -- defining binaries in their bins --
+benchmark_binaries_debug = {
     "saxpy_plain": "./cmake-build-debug/src/saxpy/saxpy_plain",
     "saxpy_restrict": "./cmake-build-debug/src/saxpy/saxpy_restrict",
     "saxpy_parallel": "./cmake-build-debug/src/saxpy/saxpy_parallel",
+    "saxpy_parallel_restrict": "./cmake-build-debug/src/saxpy/saxpy_parallel_restrict",
+    "saxpy_openblas": "./cmake-build-debug/src/saxpy/saxpy_openblas",
+    "saxpy_openblas_parallel": "./cmake-build-debug/src/saxpy/saxpy_openblas_parallel",
+    "saxpy_simd": "./cmake-build-debug/src/saxpy/saxpy_simd",
     # "saxpy_gpu": "./cmake-build-benchmark/src/saxpy/saxpy_gpu",
 }
 
-runs = 30
+benchmark_binaries_benchmark = {
+    "saxpy_plain": "./cmake-build-benchmark/src/saxpy/saxpy_plain",
+    "saxpy_restrict": "./cmake-build-benchmark/src/saxpy/saxpy_restrict",
+    "saxpy_parallel": "./cmake-build-benchmark/src/saxpy/saxpy_parallel",
+    "saxpy_parallel_restrict": "./cmake-build-benchmark/src/saxpy/saxpy_parallel_restrict",
+    "saxpy_openblas": "./cmake-build-benchmark/src/saxpy/saxpy_openblas",
+    "saxpy_openblas_parallel": "./cmake-build-benchmark/src/saxpy/saxpy_openblas_parallel",
+    "saxpy_simd": "./cmake-build-benchmark/src/saxpy/saxpy_simd",
+    # "saxpy_gpu": "./cmake-build-benchmark/src/saxpy/saxpy_gpu",
+}
+
+
+runs = args.runs
 parallel_thread_counts = [1, 2, 4, 6]
 physical_cores = [0, 2, 4, 6, 8, 10]
+
+benchmark_binaries = {}
+if args.bin == "debug":
+    benchmark_binaries = benchmark_binaries_debug
+elif args.bin == "benchmark":
+    benchmark_binaries = benchmark_binaries_benchmark
 
 perf_events = [
     "cycles",
@@ -32,6 +69,7 @@ def run_perf(binary, threads=None):
 
     if threads is not None:
         env["OMP_NUM_THREADS"] = str(threads)
+        env["OPENBLAS_NUM_THREADS"] = str(threads)
         env["OMP_PROC_BIND"] = "true"
         env["OMP_PLACES"] = "cores"
         core_list = ",".join(map(str, physical_cores[:threads]))
@@ -94,7 +132,8 @@ results = {}
 
 for name, binary in benchmark_binaries.items():
 
-    thread_list = parallel_thread_counts if name == "saxpy_parallel" else [None]
+    parallel_kernels = ["saxpy_parallel", "saxpy_parallel_restrict", "saxpy_openblas_parallel"]
+    thread_list = parallel_thread_counts if name in parallel_kernels else [None]
 
     for t in thread_list:
         key = f"{name}" + (f"_threads{t}" if t else "")
@@ -152,6 +191,7 @@ now = datetime.now().strftime("%A, %B %d, %Y")
 print(f"## SAXPY Benchmark Results    ")
 print(f"Date: {now}   ")
 print(f"Runs per configuration: {runs}\n    ")
+print(f"Configuration: {args.bin}\n    ")
 
 print("| Kernel | Threads | Median time (s) | Highest time (s) | Lowest time(s) | GFLOPs/s | Mem BW (GB/s) | IPC | Frontend Idle (%) | CPUs Utilized |")
 print("|:------:|:-------:|:---------------:|:----------------:|:--------------:|:--------:|:-------------:|:---:|:-----------------:|:-------------:|")
