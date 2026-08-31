@@ -1,9 +1,9 @@
-#ifndef LEARNCLEANC_PARALLEL_KERNEL_H
-#define LEARNCLEANC_PARALLEL_KERNEL_H
+#ifndef PARALLEL_KERNEL_H
+#define PARALLEL_KERNEL_H
 
-void saxpy_parallel(const float * restrict x,
-                    float * restrict y,
+void saxpy_parallel(const float * x,
+                    float * y,
                     const float a,
                     const int arr_size);
 
-#endif // LEARNCLEANC_PARALLEL_KERNEL_H
+#endif // PARALLEL_KERNEL_H

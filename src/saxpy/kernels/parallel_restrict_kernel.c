@@ -1,8 +1,8 @@
 #include "../include/parallel_kernel.h"
 #include <omp.h>
 
-void saxpy_parallel(const float * x,
-                    float * y,
+void saxpy_parallel_restrict(const float * restrict x,
+                    float * restrict y,
                     const float a,
                     const int arr_size) {
     #pragma omp parallel for schedule(static)
