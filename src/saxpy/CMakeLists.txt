@@ -57,6 +57,7 @@ add_executable(saxpy_simd
         driver/simd_driver.c
         kernels/simd_kernel.c
 )
+target_compile_options(saxpy_simd PRIVATE -mavx2 -mfma)
 target_link_libraries(saxpy_simd PRIVATE project_config OpenMP::OpenMP_C BLAS::BLAS)
 target_include_directories(saxpy_simd PRIVATE .)
 
