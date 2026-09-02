@@ -37,6 +37,7 @@ target_link_libraries(project_config INTERFACE
 
 # Source Kernels
 add_subdirectory(src/saxpy)
+add_subdirectory(src/gemm)
 
 # Testing
 enable_testing()
