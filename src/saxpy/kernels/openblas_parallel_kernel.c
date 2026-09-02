@@ -1,4 +1,4 @@
-#include "../include/openblas_kernel.h"
+#include "../include/openblas_parallel_kernel.h"
 
 #include <cblas.h>
 
