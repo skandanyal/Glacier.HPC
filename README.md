@@ -137,12 +137,22 @@ ctest --test-dir cmake-build-test --output-on-failure
 
 `Note:` Ensure that the binaries are build before running the following scripts
 
-1. To benchmark the saxpy binaries in `Debug` bin
+1. To benchmark the SAXPY binaries in `Debug` bin
 ```bash
-python3 py_benchmark_harness/saxpy_benchmark.py --runs=5 --bin=debug
+python3 py_benchmark_harness/saxpy_benchmark.py --runs=5 --bin=debug 
 ```
 
-2. To benchmark the saxpy binaries in `Benchmark` bin
+2. To benchmark the SAXPY binaries in `Benchmark` bin
 ```bash
 python3 py_benchmark_harness/saxpy_benchmark.py --runs=30 --bin=benchmark 
+```
+
+3. To benchmark the GEMM binaries in `Debug` bin
+```bash
+python3 py_benchmark_harness/gemm_benchmark.py --runs=5 --bin=debug 
+```
+
+4. To benchmark the GEMM binaries in `Benchmark` bin
+```bash
+python3 py_benchmark_harness/gemm_benchmark.py --runs=30 --bin=benchmark 
 ```
