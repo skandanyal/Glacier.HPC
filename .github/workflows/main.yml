@@ -20,18 +20,18 @@ jobs:
           sudo apt-get install -y \
             cmake \
             ninja-build \
-            libgen3-dev \
+            build-essential \
+#            libgen3-dev \
             libopenblas-dev \
             libomp-dev 
 
       - name: Configure CMake
-        run: cmake -B smake-build-test -G Ninja -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -B cmake-build-test -G Ninja -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build Targets
         run: cmake --build cmake-build-test --target saxpy_test
 
       - name: Run Tests
         run: |
-          cd cmake-build-test
           ctest --test-dir cmake-build-test --output-on-failure
 
