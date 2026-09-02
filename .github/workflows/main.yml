@@ -1,0 +1,37 @@
+name: Glacier.HPC CLI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            ninja-build \
+            libgen3-dev \
+            libopenblas-dev \
+            libomp-dev 
+
+      - name: Configure CMake
+        run: cmake -B smake-build-test -G Ninja -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build Targets
+        run: cmake --build cmake-build-test --target saxpy_test
+
+      - name: Run Tests
+        run: |
+          cd cmake-build-test
+          ctest --test-dir cmake-build-test --output-on-failure
+
