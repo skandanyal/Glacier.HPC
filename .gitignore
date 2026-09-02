@@ -2,6 +2,6 @@
 do_not_push/instructions.md
 do_not_push/look_here.md
 do_not_push/perf_instructions.md
-results/trial/
+results/gemm/trial/
 do_not_push/
 results/saxpy/important/
