@@ -21,7 +21,6 @@ jobs:
             cmake \
             ninja-build \
             build-essential \
-#            libgen3-dev \
             libopenblas-dev \
             libomp-dev 
 
@@ -29,9 +28,10 @@ jobs:
         run: cmake -B cmake-build-test -G Ninja -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build Targets
-        run: cmake --build cmake-build-test --target saxpy_test
+        run: cmake --build cmake-build-test
 
       - name: Run Tests
         run: |
           ctest --test-dir cmake-build-test --output-on-failure
 
+#            libgen3-dev \
