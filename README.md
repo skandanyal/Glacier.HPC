@@ -1,5 +1,3 @@
-from py_benchmark_harness import saxpy_benchmark
-
 ```
  ██████╗ ██╗      █████╗  ██████╗██╗███████╗██████╗    ██╗  ██╗██████╗  ██████╗
 ██╔════╝ ██║     ██╔══██╗██╔════╝██║██╔════╝██╔══██╗   ██║  ██║██╔══██╗██╔════╝
@@ -17,7 +15,6 @@ Author: Skandan C.Y
 
 [![Glacier.ML CI](https://github.com/skandanyal/Glacier.HPC/actions/workflows/main.yml/badge.svg)](https://github.com/skandanyal/Glacier.HPC/actions/workflows/main.yml)
 
-
 ## Goals
 
 ### Software and Runtime goals
@@ -34,7 +31,7 @@ Author: Skandan C.Y
 - Study performance scaling across multiple threads
 - Finally, establish a roofline model depicting textbook vs observed kernel behaviour
 
-----
+---
 
 ## Scope
 
@@ -45,7 +42,7 @@ especially used in Glacier.ML
 - GEMM
 - pth order distance (kNN)
 
-----
+---
 
 ## Benchmarking Environment
 
@@ -75,7 +72,7 @@ Theoretical bandwidth mentioned to be `38.4 GB/s`.
 
 Benchmark results are exploratory and used primarily for relative comparison and profiling, not for leaderboard claims.
 
-----
+---
 
 ## Methodology
 
@@ -84,16 +81,16 @@ Benchmark results are exploratory and used primarily for relative comparison and
 - A Python based harness is used to perform benchmarking experiments, ensuring minimal human interference.
 - Google Test suit is used to check for kernel correctness upon upload to version control.
 
-----
+---
 
 ## Languages and Frameworks used:
 
-**Language:**     
+**Language:**  
 [![C](https://img.shields.io/badge/C-283593?style=for-the-badge&logo=c&logoColor=white)](https://www.c-language.org/)
 [![C++20](https://img.shields.io/badge/C%2B%2B20-1565C0?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://en.cppreference.com/w/cpp/20)
 [![Python 3.12](https://img.shields.io/badge/Python%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 
-**Stack used:**    
+**Stack used:**  
 ![OpenMP](https://img.shields.io/badge/OpenMP-26667F?style=for-the-badge&logo=openmp&logoColor=white)
 ![OpenBLAS](https://img.shields.io/badge/OpenBLAS-E00?style=for-the-badge&logo=openblas&logoColor=white)
 
@@ -102,57 +99,65 @@ Benchmark results are exploratory and used primarily for relative comparison and
 ![perf](https://img.shields.io/badge/perf-E03C31?style=for-the-badge&logo=linux&logoColor=white)
 [![GTest](https://img.shields.io/badge/GTest-E03C31?style=for-the-badge&logo=gtest&logoColor=white)](https://github.com/google/googletest)
 
-----
+---
 
 ## Build instructions
 
 1. To build with `Debug` flags (`-g`, `-O0`)
+
 ```bash
 cmake -S . -B cmake-build-debug -DCMAKE_BUILD_TYPE=Debug
-cmake --build cmake-build-debud 
+cmake --build cmake-build-debud
 ```
 
 2. To build with `Benchmark` flags (`-O3`, `-march=native`, `-ffast-math`)
+
 ```bash
 cmake -S . -B cmake-build-release -DCMAKE_BUILD_TYPE=Release
-cmake --build cmake-build-release 
+cmake --build cmake-build-release
 ```
 
 3. To build with `Release` flags (`-O3`, `-ffast-math`) {serves as CMakeLists' default fallback route}
+
 ```bash
 cmake -S . -B cmake-build-release -DCMAKE_BUILD_TYPE=Release
-cmake --build cmake-build-release 
+cmake --build cmake-build-release
 ```
 
 4. To generate and run `Tests`
+
 ```bash
 cmake -S . -B cmake-build-test -DCMAKE_BUILD_TYPE=Debug
 cmake --build cmake-build-test
 ctest --test-dir cmake-build-test --output-on-failure
 ```
 
-----
+---
 
 ## To run the benchmark script
 
 `Note:` Ensure that the binaries are build before running the following scripts
 
 1. To benchmark the SAXPY binaries in `Debug` bin
+
 ```bash
-python3 py_benchmark_harness/saxpy_benchmark.py --runs=5 --bin=debug 
+python3 py_benchmark_harness/saxpy_benchmark.py --runs=5 --bin=debug
 ```
 
 2. To benchmark the SAXPY binaries in `Benchmark` bin
+
 ```bash
-python3 py_benchmark_harness/saxpy_benchmark.py --runs=30 --bin=benchmark 
+python3 py_benchmark_harness/saxpy_benchmark.py --runs=30 --bin=benchmark
 ```
 
 3. To benchmark the GEMM binaries in `Debug` bin
+
 ```bash
-python3 py_benchmark_harness/gemm_benchmark.py --runs=5 --bin=debug 
+python3 py_benchmark_harness/gemm_benchmark.py --runs=5 --bin=debug
 ```
 
 4. To benchmark the GEMM binaries in `Benchmark` bin
+
 ```bash
-python3 py_benchmark_harness/gemm_benchmark.py --runs=30 --bin=benchmark 
+python3 py_benchmark_harness/gemm_benchmark.py --runs=30 --bin=benchmark
 ```
